@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QUANLICAPHEModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BAN">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BILLs" Relationship="Self.FK__BILL__idTable__628FA481" FromRole="BAN" ToRole="BILL" />
+  </EntityType>
+  <EntityType Name="BILL">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idTable" Type="Int32" Nullable="false" />
+    <Property Name="createdate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="BAN" Relationship="Self.FK__BILL__idTable__628FA481" FromRole="BILL" ToRole="BAN" />
+    <NavigationProperty Name="BILLINFOes" Relationship="Self.FK__BILLINFO__idBill__656C112C" FromRole="BILL" ToRole="BILLINFO" />
+  </EntityType>
+  <EntityType Name="BILLINFO">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idBill" Type="Int32" Nullable="false" />
+    <Property Name="idFood" Type="Int32" Nullable="false" />
+    <Property Name="count" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BILL" Relationship="Self.FK__BILLINFO__idBill__656C112C" FromRole="BILLINFO" ToRole="BILL" />
+    <NavigationProperty Name="FOOD" Relationship="Self.FK__BILLINFO__idFood__66603565" FromRole="BILLINFO" ToRole="FOOD" />
+  </EntityType>
+  <EntityType Name="FOOD">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BILLINFOes" Relationship="Self.FK__BILLINFO__idFood__66603565" FromRole="FOOD" ToRole="BILLINFO" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DISPLAYNAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="USERNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PASSWORD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__BILL__idTable__628FA481">
+    <End Role="BAN" Type="Self.BAN" Multiplicity="1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BAN">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="idTable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILLINFO__idBill__656C112C">
+    <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
+    <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BILL">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BILLINFO">
+        <PropertyRef Name="idBill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILLINFO__idFood__66603565">
+    <End Role="FOOD" Type="Self.FOOD" Multiplicity="1" />
+    <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FOOD">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BILLINFO">
+        <PropertyRef Name="idFood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QUANLICAPHEEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BANs" EntityType="Self.BAN" />
+    <EntitySet Name="BILLs" EntityType="Self.BILL" />
+    <EntitySet Name="BILLINFOes" EntityType="Self.BILLINFO" />
+    <EntitySet Name="FOODs" EntityType="Self.FOOD" />
+    <EntitySet Name="USERS" EntityType="Self.USER" />
+    <AssociationSet Name="FK__BILL__idTable__628FA481" Association="Self.FK__BILL__idTable__628FA481">
+      <End Role="BAN" EntitySet="BANs" />
+      <End Role="BILL" EntitySet="BILLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILLINFO__idBill__656C112C" Association="Self.FK__BILLINFO__idBill__656C112C">
+      <End Role="BILL" EntitySet="BILLs" />
+      <End Role="BILLINFO" EntitySet="BILLINFOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILLINFO__idFood__66603565" Association="Self.FK__BILLINFO__idFood__66603565">
+      <End Role="FOOD" EntitySet="FOODs" />
+      <End Role="BILLINFO" EntitySet="BILLINFOes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

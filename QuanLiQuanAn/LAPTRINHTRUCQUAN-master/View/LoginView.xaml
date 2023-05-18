@@ -1,0 +1,445 @@
+﻿<Window x:Class="QUANLICAPHE.View.LoginView" 
+
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+
+        xmlns:local="clr-namespace:QUANLICAPHE.View" 
+
+        xmlns:viewModel="clr-namespace:QUANLICAPHE.ViewModel" 
+
+        xmlns:customcontrol="clr-namespace:QUANLICAPHE.CustomControl" 
+
+        mc:Ignorable="d" 
+
+        Title="LoginView" Height="550" Width="800" 
+
+        WindowStyle="None" 
+
+        ResizeMode="NoResize" 
+
+        WindowStartupLocation="CenterScreen" 
+
+        MouseDown="Window_MouseDown" 
+
+        Background="Transparent" 
+
+        AllowsTransparency="True" 
+
+        Name="LoginWindow" 
+
+         
+
+                xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+
+ 
+
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}" 
+
+     TextElement.FontWeight="Regular" 
+
+     TextElement.FontSize="13" 
+
+     TextOptions.TextFormattingMode="Ideal" 
+
+     TextOptions.TextRenderingMode="Auto" 
+
+     FontFamily="{DynamicResource MaterialDesignFont}" 
+
+         
+
+        >
+
+    <Window.DataContext>
+
+        <viewModel:LoginViewModel/>
+
+    </Window.DataContext>
+
+
+
+
+
+
+
+    <Border CornerRadius="50">
+
+
+
+        <Border.Background >
+
+            <ImageBrush ImageSource="\Image\Login.jpg" 
+
+                        Stretch="Fill" 
+
+                        />
+
+        </Border.Background>
+
+        <Border CornerRadius="50" 
+
+                BorderThickness="5"     
+
+            >
+
+
+
+            <Border.BorderBrush>
+
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+
+                    <GradientStop Color="#659999" Offset="0"></GradientStop>
+
+                    <GradientStop Color="#f4791f" Offset="0.75"></GradientStop>
+
+                    <GradientStop Color="#b07a0e" Offset="1.0"></GradientStop>
+
+                </LinearGradientBrush>
+
+            </Border.BorderBrush>
+
+            <Border CornerRadius="50">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+
+                        <RowDefinition Height="40" />
+
+                        <RowDefinition/>
+
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+
+                        <ColumnDefinition/>
+
+                        <ColumnDefinition Width="307.03"/>
+
+                        <ColumnDefinition Width="92.97"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Margin="10,20,-10,20" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
+
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="17*"/>
+
+                            <ColumnDefinition Width="3*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Button                     
+
+                            Background="#FF5B2A18" 
+
+                            Command="{Binding CloseCommand}" 
+
+                            CommandParameter="{Binding ElementName=LoginWindow}" 
+
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"   
+
+                           Margin="316,-11,40,479" Grid.ColumnSpan="2" Foreground="#DDFF0000" BorderBrush="#FF581815" FontSize="16">
+
+                            <materialDesign:PackIcon Foreground="Brown" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Kind="Close" RenderTransformOrigin="0.567,1.766" />
+
+                        </Button>
+
+                        <Button  HorizontalAlignment="Left"  Click="MinimizeBTN_Click_1"                            
+
+                                               x:Name="MinimizeBTN" 
+
+                        Content="{materialDesign:PackIcon Kind=WindowMinimize}"     
+
+                        ToolBar.OverflowMode="AsNeeded"  
+
+                        Background="#FF5B2A18" 
+
+                        ToolTip="Minimize" Margin="255,-11,0,479" Width="44" Foreground="#DD2B1919" BorderBrush="#FF442517" />
+
+                    </Grid>
+
+
+
+                    <Border Background="#fcedc2" CornerRadius="50" 
+
+                            BorderThickness="2" 
+
+                            Grid.Row="1" 
+
+                            HorizontalAlignment="Left" 
+
+                            Margin="50,75,0,75" 
+
+                            Height="350" 
+
+                            Width="300" 
+
+                            Opacity="0.8" 
+
+                            BorderBrush="Orange" 
+
+                            >
+
+                        <StackPanel  
+
+                                Grid.Row="1" 
+
+                                HorizontalAlignment="Center" 
+
+                                Background="Transparent" 
+
+                                Width="300" 
+
+                                Orientation="Vertical" Margin="0,8,0,-2" 
+
+                                >
+
+
+
+
+
+                            <StackPanel.Style>
+
+                                <Style TargetType="StackPanel">
+
+
+
+                                    <Setter Property="Opacity" Value="0.75"/>
+
+
+
+                                </Style>
+
+                            </StackPanel.Style>
+
+                            <TextBlock Text="ĐĂNG NHẬP" 
+
+                           Foreground="#FF5F0505" 
+
+                           FontWeight="Bold" 
+
+                           FontSize="30" 
+
+                           VerticalAlignment="Center" 
+
+                           HorizontalAlignment="Center"></TextBlock>
+
+                            <Border Width="300" 
+
+                                    Height="4" 
+
+                                    Margin="0,10,0,0">
+
+                                <Border.Background>
+
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+
+                                        <GradientStop Color="#c31432" Offset="0"></GradientStop>
+
+                                        <GradientStop Color="#240b36" Offset="0.75"></GradientStop>
+
+                                        <GradientStop Color="#b07a0e" Offset="1.0"></GradientStop>
+
+                                    </LinearGradientBrush>
+
+                                </Border.Background>
+
+                            </Border>
+
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition></RowDefinition>
+
+                                    <RowDefinition></RowDefinition>
+
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0"  Grid.RowSpan="2">
+
+                                    <Grid.ColumnDefinitions >
+
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+
+                                        <ColumnDefinition></ColumnDefinition>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0" Width="50" Height="100" Margin="0">
+
+                                        <materialDesign:PackIcon Foreground="Brown" Width="30" Height="30" HorizontalAlignment="Center" Kind="Account" RenderTransformOrigin="0.589,1.378" Margin="0,-4,0,0"/>
+
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+
+                                        <TextBox 
+                                            TabIndex="0"
+                                             
+
+                         Text="{Binding UserName,UpdateSourceTrigger=PropertyChanged}"        
+
+                        VerticalAlignment="Top" 
+
+                        materialDesign:HintAssist.Hint="TÊN ĐĂNG NHẬP"  
+
+                         FontSize="16"                    
+
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,36,24,0" />
+
+                                    </Grid>
+
+                                </Grid>
+
+                                <Grid Grid.Row="1" Margin="2,60,12,48">
+
+                                    <Grid.ColumnDefinitions >
+
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+
+                                        <ColumnDefinition></ColumnDefinition>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0" Width="50" Height="100" Margin="0">
+
+                                        <materialDesign:PackIcon Foreground="Brown" Width="30" Height="30" HorizontalAlignment="Center" Kind="Lock" RenderTransformOrigin="0.567,1.766" Margin="0,50,0,0" />
+
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+
+                                        <PasswordBox 
+                                             TabIndex="1"
+                                            FontSize="16" 
+
+                        x:Name="FloatingPasswordBox"  
+
+                        materialDesign:HintAssist.Foreground="Brown"  
+
+                        materialDesign:HintAssist.Hint="MẬT KHẨU" 
+
+                        materialDesign:TextFieldAssist.UnderlineBrush="Brown" 
+
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0,35,10,20">
+
+                                            <i:Interaction.Triggers>
+
+                                                <i:EventTrigger EventName="PasswordChanged">
+
+                                                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
+
+                                                </i:EventTrigger>
+
+                                            </i:Interaction.Triggers>
+
+                                        </PasswordBox>
+
+                                    </Grid>
+
+                                </Grid>
+
+                                <Grid Grid.Row="2" Margin="10,83,20,5" Grid.RowSpan="2">
+
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition></ColumnDefinition>
+
+                                        <ColumnDefinition></ColumnDefinition>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid  
+
+   
+
+                          Width="124">
+        
+                                        <Button  IsDefault="True" 
+                                                TabIndex="2"
+                                                 BorderThickness="1" 
+
+                            Command="{Binding LoginCommand}" 
+
+                            CommandParameter="{Binding ElementName=LoginWindow}" 
+
+                            Margin="50,88,-88,0"  
+
+                            materialDesign:ButtonProgressAssist.IsIndeterminate="True"    
+
+                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"   
+
+                            materialDesign:ButtonProgressAssist.Value="-1"  
+
+                            Content="ĐĂNG NHẬP" 
+
+                            Background="#FFFF6900"   
+
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"    
+
+                            Style="{StaticResource MaterialDesignRaisedButton}" BorderBrush="#FF5A00FB" Foreground="#DDFFFFFF" />
+
+                                    </Grid>
+
+                                    <Grid Grid.Column="1"   
+
+                         Width="124" Margin="11,0,0,0" >
+
+                                        <Grid.RowDefinitions>
+
+                                            <RowDefinition Height="19*"/>
+
+                                            <RowDefinition Height="67*"/>
+
+                                        </Grid.RowDefinitions>
+
+                                        <Grid>
+
+                                            <Button 
+                                                TabIndex="3"
+                                                Content="QUÊN MẬT KHẨU" 
+
+                                                Command="{Binding ShowQuenMK}" 
+
+                                                Background="#FF5F0505" 
+
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+
+                                                Style="{StaticResource MaterialDesignPaperButton}" 
+
+                                                ToolTip="QUÊN MẬT KHẨU" Margin="-119,145,26,-142" Foreground="#DDFFFFFF" />
+
+                                        </Grid>
+
+                                    </Grid>
+
+                                    <Grid/>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                    </Border>
+
+
+
+                </Grid>
+
+            </Border>
+
+        </Border>
+
+    </Border>
+
+</Window> 

@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="QUANLICAPHE.View.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QUANLICAPHE.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="800"
+             xmlns:viewmodel="clr-namespace:QUANLICAPHE.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewmodel:AccountViewModel}"
+             x:Name="AccountVM"
+        xmlns:f="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:viewModel="clr-namespace:QUANLICAPHE.ViewModel"
+        xmlns:customcontrol="clr-namespace:QUANLICAPHE.CustomControl"
+     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="18"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     FontFamily="{DynamicResource MaterialDesignFont}">
+    <UserControl.DataContext>
+        <viewModel:AccountViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <local:ChangePasswordView x:Key="ChangePasswordVM">
+            <viewmodel:ChangePasswordViewModel></viewmodel:ChangePasswordViewModel>
+        </local:ChangePasswordView>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="360"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#FF772F0D" CornerRadius="10">
+            <TextBlock VerticalAlignment="Center" Text="   Thông Tin Cá Nhân" FontSize="32" FontWeight="Bold" Foreground="White"></TextBlock>
+        </Border>
+        <Border Margin="0 3 0 0" Grid.Row="1" CornerRadius="15" Background="White">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Border Width="260" Height="260" CornerRadius="180" Background="#FFD86C20" Margin="31,16,59,81"></Border>
+                    <Border CornerRadius="180" Width="250" Height="250" RenderTransformOrigin="0.5,0.5" Margin="36,21,64,86">
+                        <Border.Background>
+                            <ImageBrush Stretch="Fill" ImageSource="{Binding imageuser}"></ImageBrush>
+                        </Border.Background>
+                    </Border>
+                    <Button
+                        Height="40"
+                Background="White"
+                Content="THAY ĐỔI ẢNH"
+                Command="{Binding ChangeImage}"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="#FF603814" BorderBrush="#FF581815" RenderTransformOrigin="0.474,1.289"  FontSize="18" FontWeight="Bold" Margin="81,292,109,25" />
+                </Grid>
+                <Grid Grid.Column="1">
+                    <TextBox Width="200"
+                         Text="{Binding hoten,UpdateSourceTrigger=PropertyChanged}"       
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Họ Tên" 
+                         FontSize="18"                   
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,35,250,0" Foreground="#DDA56414" />
+                    <ComboBox
+                        x:Name="cbb1"
+                        Height="55"
+                        materialDesign:HintAssist.Hint="Giới Tính"
+                        materialDesign:TextFieldAssist.HasClearButton="True" 
+                        SelectedValue="{Binding SelectedSex}"
+                        SelectedValuePath="Content"
+                        
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}"  RenderTransformOrigin="1.247,-0.93" VerticalAlignment="Top" Margin="225,27,25,0" FontSize="18" Foreground="#DDA56414" >
+                        <ComboBoxItem>Nam</ComboBoxItem>
+                        <ComboBoxItem>Nữ</ComboBoxItem>
+                    </ComboBox>
+                    <DatePicker
+                        Foreground="#DDA56414"
+                        FontSize="18"
+                        SelectedDate="{Binding ngaysinh,UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="Ngày Sinh"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                      
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,108,250,0" VerticalAlignment="Top" />
+                    <TextBox Width="200"
+                           
+                         Text="{Binding sdt,UpdateSourceTrigger=PropertyChanged}"       
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Số Điện Thoại" 
+                         FontSize="18"                   
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="225,108,25,0" Foreground="#DDA56414" />
+                    <TextBox
+                         Text="{Binding diachi,UpdateSourceTrigger=PropertyChanged}"       
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Địa Chỉ" 
+                         FontSize="18"                   
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,178,25,0" Foreground="#DDA56414" />
+                    <TextBox
+                         Text="{Binding email,UpdateSourceTrigger=PropertyChanged}"       
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Email" 
+                         FontSize="18"                   
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,231,25,0" Foreground="#DDA56414" />
+                    <Button
+                Background="#FF772F0D"
+                Content="CẬP NHẬT THÔNG TIN"
+                Command="{Binding UpdateImfomation}"
+                CommandParameter="{Binding AccountView}"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="White" BorderBrush="#FF581815" RenderTransformOrigin="0.474,1.289"  FontSize="18" FontWeight="Bold" Margin="105,300,130,25" Click="Button_Click" />
+
+                </Grid>
+            </Grid>
+        </Border>
+        <Border Margin="0 3 0 3" Grid.Row="2" Background="#FF772F0D" CornerRadius="10">
+            <TextBlock VerticalAlignment="Center" Text="   Thông Tin Tài Khoản" FontSize="32" FontWeight="Bold" Foreground="White"></TextBlock>
+        </Border>
+        <Border Grid.Row="3" Background="White" CornerRadius="12">
+            <Grid>
+                <TextBox
+                         Text="{Binding username}"       
+                        VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="Tên Đăng Nhập" 
+                         FontSize="18"                   
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="42,0,535,0" Foreground="#DDA56414" Height="50" FontStyle="Italic"  />
+                <PasswordBox
+                    FontStyle="Italic"
+                    Foreground="#DDA56414"
+                        FontSize="18"
+                        x:Name="FloatingPasswordBox" 
+                        materialDesign:HintAssist.Foreground="Brown" 
+                        materialDesign:HintAssist.Hint="Mật Khẩu"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Brown"
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="315,10,263,15" AllowDrop="True" ToolTip="Không hiện mât khẩu" IsEnabled="False" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PasswordChanged">
+                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </PasswordBox>
+                <Button
+                    Height="40"
+                    Width="180"
+                Background="#FF772F0D"
+                Content="ĐỔI MẬT KHẨU"
+                Command="{Binding ChangePassword}"
+                CommandParameter="{Binding ElementName=AccountVM}"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="White" BorderBrush="#FF581815" RenderTransformOrigin="0.474,1.289"  FontSize="18" FontWeight="Bold" Margin="592,15,28,15" />
+            </Grid>
+        </Border>
+    </Grid>
+
+</UserControl>

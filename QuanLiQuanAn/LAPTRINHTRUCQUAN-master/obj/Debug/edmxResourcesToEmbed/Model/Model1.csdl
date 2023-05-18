@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QUANLICAPHEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="QUANLICAPHEEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bills" EntityType="QUANLICAPHEModel.Bill" />
+    <EntitySet Name="BillInfoes" EntityType="QUANLICAPHEModel.BillInfo" />
+    <EntitySet Name="Foods" EntityType="QUANLICAPHEModel.Food" />
+    <EntitySet Name="FoodCategories" EntityType="QUANLICAPHEModel.FoodCategory" />
+    <EntitySet Name="TableFoods" EntityType="QUANLICAPHEModel.TableFood" />
+    <EntitySet Name="Users" EntityType="QUANLICAPHEModel.User" />
+    <AssociationSet Name="FK__Bill__status__3A81B327" Association="QUANLICAPHEModel.FK__Bill__status__3A81B327">
+      <End Role="TableFood" EntitySet="TableFoods" />
+      <End Role="Bill" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BillInfo__count__3E52440B" Association="QUANLICAPHEModel.FK__BillInfo__count__3E52440B">
+      <End Role="Bill" EntitySet="Bills" />
+      <End Role="BillInfo" EntitySet="BillInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BillInfo__idFood__3F466844" Association="QUANLICAPHEModel.FK__BillInfo__idFood__3F466844">
+      <End Role="Food" EntitySet="Foods" />
+      <End Role="BillInfo" EntitySet="BillInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Food__idCategory__2B3F6F97" Association="QUANLICAPHEModel.FK__Food__idCategory__2B3F6F97">
+      <End Role="FoodCategory" EntitySet="FoodCategories" />
+      <End Role="Food" EntitySet="Foods" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCheckIn" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateCheckOut" Type="DateTime" Precision="0" />
+    <Property Name="idTable" Type="Int32" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TableFood" Relationship="QUANLICAPHEModel.FK__Bill__status__3A81B327" FromRole="Bill" ToRole="TableFood" />
+    <NavigationProperty Name="BillInfoes" Relationship="QUANLICAPHEModel.FK__BillInfo__count__3E52440B" FromRole="Bill" ToRole="BillInfo" />
+  </EntityType>
+  <EntityType Name="BillInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idBill" Type="Int32" Nullable="false" />
+    <Property Name="idFood" Type="Int32" Nullable="false" />
+    <Property Name="count" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bill" Relationship="QUANLICAPHEModel.FK__BillInfo__count__3E52440B" FromRole="BillInfo" ToRole="Bill" />
+    <NavigationProperty Name="Food" Relationship="QUANLICAPHEModel.FK__BillInfo__idFood__3F466844" FromRole="BillInfo" ToRole="Food" />
+  </EntityType>
+  <EntityType Name="Food">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="idCategory" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="size" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="imageFood" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="deleteFood" Type="Double" Nullable="false" />
+    <NavigationProperty Name="BillInfoes" Relationship="QUANLICAPHEModel.FK__BillInfo__idFood__3F466844" FromRole="Food" ToRole="BillInfo" />
+    <NavigationProperty Name="FoodCategory" Relationship="QUANLICAPHEModel.FK__Food__idCategory__2B3F6F97" FromRole="Food" ToRole="FoodCategory" />
+  </EntityType>
+  <EntityType Name="FoodCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="deleteFoodCategory" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Foods" Relationship="QUANLICAPHEModel.FK__Food__idCategory__2B3F6F97" FromRole="FoodCategory" ToRole="Food" />
+  </EntityType>
+  <EntityType Name="TableFood">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bills" Relationship="QUANLICAPHEModel.FK__Bill__status__3A81B327" FromRole="TableFood" ToRole="Bill" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="USERNAME" />
+    </Key>
+    <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="TYPE" Type="Int32" Nullable="false" />
+    <Property Name="HOTEN" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GIOITINH" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NGAYSINH" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SDT" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DIACHI" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGEUSER" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="DANGNHAP" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Bill__status__3A81B327">
+    <End Type="QUANLICAPHEModel.TableFood" Role="TableFood" Multiplicity="1" />
+    <End Type="QUANLICAPHEModel.Bill" Role="Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TableFood">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="idTable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BillInfo__count__3E52440B">
+    <End Type="QUANLICAPHEModel.Bill" Role="Bill" Multiplicity="1" />
+    <End Type="QUANLICAPHEModel.BillInfo" Role="BillInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BillInfo">
+        <PropertyRef Name="idBill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BillInfo__idFood__3F466844">
+    <End Type="QUANLICAPHEModel.Food" Role="Food" Multiplicity="1" />
+    <End Type="QUANLICAPHEModel.BillInfo" Role="BillInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Food">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BillInfo">
+        <PropertyRef Name="idFood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Food__idCategory__2B3F6F97">
+    <End Type="QUANLICAPHEModel.FoodCategory" Role="FoodCategory" Multiplicity="1" />
+    <End Type="QUANLICAPHEModel.Food" Role="Food" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Food">
+        <PropertyRef Name="idCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

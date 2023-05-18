@@ -1,0 +1,244 @@
+﻿<UserControl x:Class="QUANLICAPHE.View.TableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:QUANLICAPHE.View" xmlns:viewmodel="clr-namespace:QUANLICAPHE.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TableViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <UserControl.Resources>
+        <local:PrintBillView x:Key="PrintBillVM">
+            <viewmodel:PrintBillViewModel></viewmodel:PrintBillViewModel>
+        </local:PrintBillView>
+    </UserControl.Resources>
+    <Border 
+            CornerRadius="10"
+            BorderThickness="0"
+            >
+
+
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#fff" Offset="0.25"></GradientStop>
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer>
+                <Border CornerRadius="10,0,0,10"
+                        Width="394"
+                        >
+
+
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#eacda3" Offset="0.25"></GradientStop>
+                            <GradientStop Color="#d6ae7b" Offset="0.85"></GradientStop>
+                        </LinearGradientBrush>
+                        <!--<ImageBrush ImageSource="\Image\Coffee2.jpg"
+                        Stretch="Fill"
+                        />-->
+                    </Border.Background>
+                    <StackPanel >
+                        <ItemsControl x:Name="ListTable" ItemsSource="{Binding ListTableFood}" >
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type viewmodel:TableViewModel}">
+
+                                    <Button Style="{StaticResource busyButton}"
+                                            Width="90"
+                                            Height="90"
+                                            Margin="15"
+                                            x:Name="TABLE"
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.LoadListBillInfo}"
+                                            CommandParameter="{Binding}"
+                                            >
+                                        <!--Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.LoadListBillInfo}"-->
+
+
+
+
+                                        <TextBlock VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Text="{Binding name}"
+                                                   >
+                                        </TextBlock>
+
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+
+
+                    </StackPanel>
+
+                </Border >
+            </ScrollViewer>
+
+
+            <!--Phần bên phải-->
+
+            <Border Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <ListView
+                        Margin="0,26,0,242"
+                        ItemsSource="{Binding ListInfo}" Grid.RowSpan="2"
+                        Grid.Row="0"
+                        BorderBrush="Black"
+                        BorderThickness="2"
+                        HorizontalAlignment="Center" Width="400"
+                        Name="DisplayList"
+                        SelectionMode="Multiple"
+                        Foreground="#FF6B4309"
+                        >
+                        <!--SelectedItem="{Binding SelectedItem,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"-->
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="BorderThickness" Value="2,2,2,2" />
+                                <Setter Property="Height" Value="40"/>
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="13"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Margin" Value="0,5,0,0"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True" >
+                                        <Setter Property="Background" Value="#edae4e"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True" >
+                                        <Setter Property="Background" Value="#eea47f"/>
+                                        <Setter Property="Foreground" Value="#00539f"/>
+                                        <Setter Property="BorderBrush" Value="#054d7d"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                        </ListView.ItemContainerStyle>
+
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="130" Header="Tên món" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                                <GridViewColumn Width="120" Header="Số lượng" DisplayMemberBinding="{Binding Amount}"></GridViewColumn>
+                                <GridViewColumn Width="130" Header="Thành tiền" DisplayMemberBinding="{Binding Total,StringFormat=\{0:N0\}}"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+
+
+                    <Button Margin="239,211,15,39"     
+                            Width="146"
+                            Height="100"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="True" 
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" 
+                        materialDesign:ButtonProgressAssist.Value="-1"  
+                        Content="Thanh toán" Grid.Row="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                        Command="{Binding Checkout}"/>
+                    <Button Margin="239,315,15,3"                   
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="True" 
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" 
+                        materialDesign:ButtonProgressAssist.Value="-1"  
+                        Content="Tách Hóa Đơn" Grid.Row="1"
+                        Command="{Binding Split}"/>
+                    <Border Grid.Row="1"
+                            Background="#00539f"
+                            CornerRadius="10"
+                            Width="380"
+                            Height="40" Margin="10,149,10,161">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                       Grid.Column="0"
+                                       FontSize="18"
+                                       Margin="20 0 0 0"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="left"
+                                       Text="Tổng tiền" FontWeight="Bold" Foreground="#eea47f"></TextBlock>
+                            <TextBlock 
+                                       Grid.Column="1"
+                                       FontSize="18"
+                                        Margin="0 0 70 0"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       Text="{Binding TotalPrice,StringFormat=\{0:N0\}}"
+                                       FontWeight="Bold"
+                                       Foreground="#eea47f"></TextBlock>
+                            <TextBlock 
+                                       Grid.Column="1"
+                                       FontSize="18"
+                                        Width="40"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       Text="VND" Margin="0 0 20 0"
+                                       FontWeight="Bold"
+                                       Foreground="#eea47f"></TextBlock>
+                        </Grid>
+                    </Border>
+
+                    <Button Margin="239,351,15,-33"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="True" 
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" 
+                        materialDesign:ButtonProgressAssist.Value="-1"  
+                        Content="Thêm Bàn" Grid.Row="1"
+                        Command="{Binding AddTable}"/>
+                    <ComboBox         
+               
+                        materialDesign:HintAssist.Hint="Chọn bàn"
+                        materialDesign:TextFieldAssist.HasClearButton="True" 
+                        ItemsSource="{Binding Path=ListEmptyTableFood}"
+                        DisplayMemberPath="name"
+                        SelectedItem="{Binding SelectedTable1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}"  RenderTransformOrigin="1.247,-0.93" FontSize="16" VerticalAlignment="Top" Margin="20,259,224,0" Grid.Row="1" Height="50"/>
+                    <Button Margin="20,316,224,2" 
+                         Content="Chuyển bàn" 
+                         Command="{Binding SwitchTable}"
+                         Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                         Background="#FFCA8219" FontSize="16" Grid.Row="1"/>
+                    <Button Margin="20,352,224,-34" 
+                        Content= "Gộp bàn" 
+                        Command="{Binding MergeTable}"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                        Background="#FFCA8219" FontSize="16" Grid.Row="1"/>
+                </Grid>
+
+
+            </Border>
+
+        </Grid>
+
+
+    </Border>
+</UserControl>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QUANLIQUANANGKModelStoreContainer" CdmEntityContainer="QUANLIQUANANGKEntities1">
+    <EntitySetMapping Name="Bills">
+      <EntityTypeMapping TypeName="QUANLIQUANANGKModel.Bill">
+        <MappingFragment StoreEntitySet="Bill">
+          <ScalarProperty Name="PrintHD" ColumnName="PrintHD" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="idTable" ColumnName="idTable" />
+          <ScalarProperty Name="DateCheckOut" ColumnName="DateCheckOut" />
+          <ScalarProperty Name="DateCheckIn" ColumnName="DateCheckIn" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillInfoes">
+      <EntityTypeMapping TypeName="QUANLIQUANANGKModel.BillInfo">
+        <MappingFragment StoreEntitySet="BillInfo">
+          <ScalarProperty Name="deleteBillInfo" ColumnName="deleteBillInfo" />
+          <ScalarProperty Name="count" ColumnName="count" />
+          <ScalarProperty Name="idFood" ColumnName="idFood" />
+          <ScalarProperty Name="idBill" ColumnName="idBill" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Foods">
+      <EntityTypeMapping TypeName="QUANLIQUANANGKModel.Food">
+        <MappingFragment StoreEntitySet="Food">
+          <ScalarProperty Name="dateDeleteFood" ColumnName="dateDeleteFood" />
+          <ScalarProperty Name="dateInsertFood" ColumnName="dateInsertFood" />
+          <ScalarProperty Name="deleteFood" ColumnName="deleteFood" />
+          <ScalarProperty Name="imageFood" ColumnName="imageFood" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FoodCategories">
+      <EntityTypeMapping TypeName="QUANLIQUANANGKModel.FoodCategory">
+        <MappingFragment StoreEntitySet="FoodCategory">
+          <ScalarProperty Name="deleteFoodCategory" ColumnName="deleteFoodCategory" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TableFoods">
+      <EntityTypeMapping TypeName="QUANLIQUANANGKModel.TableFood">
+        <MappingFragment StoreEntitySet="TableFood">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="idbill" ColumnName="idbill" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="QUANLIQUANANGKModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="DANGNHAP" ColumnName="DANGNHAP" />
+          <ScalarProperty Name="IMAGEUSER" ColumnName="IMAGEUSER" />
+          <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="NGAYSINH" ColumnName="NGAYSINH" />
+          <ScalarProperty Name="GIOITINH" ColumnName="GIOITINH" />
+          <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

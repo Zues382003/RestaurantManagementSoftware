@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ddb4ab1f5e7442eb4cd8862f7f6cece" Name="Diagram1">
+        <EntityTypeShape EntityType="QUANLIQUANANGKModel.Bill" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="QUANLIQUANANGKModel.BillInfo" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="QUANLIQUANANGKModel.Food" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="QUANLIQUANANGKModel.FoodCategory" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="QUANLIQUANANGKModel.TableFood" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="QUANLIQUANANGKModel.User" Width="1.5" PointX="5.75" PointY="4.75" />
+        <AssociationConnector Association="QUANLIQUANANGKModel.FK__Bill__idTable__5070F446" />
+        <AssociationConnector Association="QUANLIQUANANGKModel.FK__BillInfo__delete__5535A963" />
+        <AssociationConnector Association="QUANLIQUANANGKModel.FK__BillInfo__idFood__5629CD9C" />
+        <AssociationConnector Association="QUANLIQUANANGKModel.FK__Food__idCategory__3F466844" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
